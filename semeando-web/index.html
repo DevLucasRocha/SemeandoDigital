@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semeando Digital - MVP</title>
+    <title>Gestão de Contratos | Semeando</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,12 +11,12 @@
     <div class="container">
         <header>
             <h1>Semeando Digital</h1>
-            <p>Módulo de Gestão de Contratos</p>
+            <p>Módulo Financeiro</p>
         </header>
 
         <main>
             <section class="card form-section">
-                <h2>Novo Contrato Financeiro</h2>
+                <h2>Emissão de Contrato</h2>
                 <form id="contratoForm">
                     <div class="form-group">
                         <label for="nome">Nome do Aluno</label>
@@ -29,36 +29,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tipoMatricula">Tipo de Matrícula</label>
+                        <label for="tipoMatricula">Categoria</label>
                         <select id="tipoMatricula" required>
-                            <option value="" disabled selected>Selecione uma opção...</option>
-                            <option value="infantil">Educação Infantil (Taxa de Associado)</option>
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="infantil">Educação Infantil (Taxa Associativa)</option>
                             <option value="fundamental">Ensino Fundamental (Mensalidade)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="valorParcela">Valor da Parcela</label>
-                        <!-- [REFLEXO DO ENCAPSULAMENTO] Campo readonly impede a digitação manual de valores incorretos (ex: R$ 310,00) -->
-                        <input type="text" id="valorParcela" value="R$ 0,00" readonly class="locked-input" title="O valor é gerado automaticamente pelo sistema.">
+                        <label for="valorParcela">Valor do Contrato</label>
+                        <input type="text" id="valorParcela" value="R$ 0,00" readonly class="locked-input" title="Calculado automaticamente via sistema">
                     </div>
 
                     <div class="lgpd-notice">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        <span><strong>Privacidade:</strong> Dados sensíveis de saúde estão ocultos nesta visualização em conformidade com o Art. 14 da LGPD.</span>
+                        <span><strong>Proteção de Dados:</strong> Ocultação de dados sensíveis aplicada (LGPD, Art. 14).</span>
                     </div>
 
-                    <!-- [REFLEXO DO POLIMORFISMO] O mesmo botão dispara ações diferentes dependendo do tipo selecionado -->
-                    <button type="submit" class="btn-primary">Gerar Documento</button>
+                    <button type="submit" class="btn-primary">Processar Contrato</button>
                 </form>
             </section>
 
             <section id="resultadoContainer" class="hidden">
-                <!-- O documento gerado aparecerá aqui -->
             </section>
         </main>
     </div>
 
-    <script src="app.js"></script>
+    <script src="contrato-service.js"></script>
 </body>
 </html>

@@ -1,22 +1,21 @@
+/**
+ * Serviço de processamento de contratos no Front-end.
+ * Responsável por aplicar as regras de negócio de precificação e formatação do contrato.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contratoForm');
     const selectTipo = document.getElementById('tipoMatricula');
     const inputValor = document.getElementById('valorParcela');
     const resultadoContainer = document.getElementById('resultadoContainer');
 
-    // [REFLEXO DO ENCAPSULAMENTO]
-    // A inteligência de precificação fica no sistema, não no usuário.
-    // O evento 'change' escuta a seleção e aplica a regra de negócio rigorosamente.
-    // O campo HTML possui o atributo 'readonly' garantindo que o usuário não possa digitar valores.
+    // Listener para aplicar as regras de precificação automaticamente
     selectTipo.addEventListener('change', (e) => {
         const tipo = e.target.value;
         
         if (tipo === 'infantil') {
             inputValor.value = 'R$ 250,00';
         } else if (tipo === 'fundamental') {
-            // Trava de segurança visual: Preenche automaticamente R$ 375,00
-            // Impedindo de forma sistêmica a falha manual (R$ 310,00) mapeada pela escola.
-            inputValor.value = 'R$ 375,00';
+            inputValor.value = 'R$ 375,00'; // Preço bloqueado via regra de negócio
         } else {
             inputValor.value = 'R$ 0,00';
         }
@@ -30,17 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const tipo = selectTipo.value;
         
         if (!tipo) {
-            alert("Por favor, selecione o tipo de matrícula.");
+            alert("Selecione a categoria da matrícula.");
             return;
         }
 
-        // [REFLEXO DO POLIMORFISMO]
-        // Baseado na seleção, a mesma ação "Gerar Documento" produz 
-        // resultados com "formas" e identidades institucionais diferentes.
         let nomeInstituicao = '';
         let tituloDocumento = '';
         let valorFinal = '';
 
+        // Formatação dinâmica do contrato com base na categoria
         if (tipo === 'infantil') {
             nomeInstituicao = 'Instituto Educacional Semeando';
             tituloDocumento = 'Taxa de Associado';
@@ -72,15 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="document-footer">
-                    <span class="total-label">Valor a Pagar</span>
+                    <span class="total-label">Valor do Contrato</span>
                     <span class="total-value">${valor}</span>
                 </div>
             </div>
         `;
         
         resultadoContainer.classList.remove('hidden');
-        
-        // Efeito de rolagem suave até o card gerado
         resultadoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 });
